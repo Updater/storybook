@@ -19,8 +19,7 @@
     "url": "https://github.com/storybooks/storybook.git"
   },
   "scripts": {
-    "dev": "cross-env DEV_BUILD=1 nodemon --watch ./src --exec \"yarn prepare\"",
-    "prepare": "node ../../scripts/prepare.js"
+    "dev": "cross-env DEV_BUILD=1 nodemon --watch ./src --exec \"yarn prepare\""
   },
   "dependencies": {
     "@storybook/addon-actions": "^3.4.0-alpha.0",
