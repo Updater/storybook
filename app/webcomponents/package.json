@@ -1,5 +1,5 @@
 {
-  "name": "@storybook/webcomponents",
+  "name": "@updater/ui-storybook-webcomponents",
   "version": "0.0.1",
   "description": "Storybook for Webcomponents: Develop Webcomponents in isolation with Hot Reloading.",
   "homepage": "https://github.com/storybooks/storybook/tree/master/app/webcomponents",
