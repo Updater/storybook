@@ -1,3 +1,5 @@
+const definedElements = new Map();
+
 function createFragment(DOMText) {
   return document.createRange().createContextualFragment(DOMText);
 }
@@ -13,8 +15,6 @@ export function renderError(error) {
 
 export function renderException(error) {
   renderError(error);
-
-  // console.log(error.stack);
 }
 
 let previousStory;
@@ -55,8 +55,15 @@ export function renderMain(data, storyStore, forceRender) {
   if (typeof CustomElement === 'string') {
     child = createFragment(CustomElement);
   } else {
-    child = new CustomElement();
-  }
+    const name = `storybook-${CustomElement.name.toLowerCase()}`;
+    if(!definedElements.has(name)) {
+      definedElements.set(name, CustomElement);
+      customElements.define(name, CustomElement);
+    }
+
+    const DefinedConstructor = definedElements.get(name);
+    child = new DefinedConstructor();
+ }
 
   root.appendChild(child);
 }
