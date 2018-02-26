@@ -26,7 +26,7 @@ export function renderException(error) {
 
 function scopeScripts(storyString) {
   let escapedScripts = storyString.replace('<script>', '<script>{');
-  escapedScripts = storyString.replace('</script>', '}</script>');
+  escapedScripts = escapedScripts.replace('</script>', '}</script>');
   return escapedScripts;
 }
 
