@@ -25,9 +25,19 @@ export function renderException(error) {
 }
 
 function scopeScripts(storyString) {
-  let escapedScripts = storyString.replace('<script>', '<script>{');
-  escapedScripts = escapedScripts.replace('</script>', '}</script>');
+  let escapedScripts = storyString.replace(new RegExp('<script>'), '<script>{');
+  escapedScripts = escapedScripts.replace(new RegExp('</script>'), '}</script>');
   return escapedScripts;
+}
+
+function renderStoryString(story) {
+  const storyString = scopeScripts(story);
+
+  const root = document.querySelector('#root');
+  emptyRoot(root);
+
+  const child = createFragment(storyString);
+  root.appendChild(child);
 }
 
 export function renderMain(data, storyStore) {
@@ -42,14 +52,13 @@ export function renderMain(data, storyStore) {
     story: selectedStory,
   };
 
-  let storyString = story ? story(context) : '<p>There is no preview for this story</p>';
-  storyString = scopeScripts(storyString);
+  const storyString = story ? story(context) : '<p>There is no preview for this story</p>';
 
-  const root = document.querySelector('#root');
-  emptyRoot(root);
-
-  const child = createFragment(storyString);
-  root.appendChild(child);
+  if (storyString.then) {
+    storyString.then(renderStoryString);
+  } else {
+    renderStoryString(storyString);
+  }
 }
 
 export default function renderPreview({ reduxStore, storyStore }, forceRender = false) {
