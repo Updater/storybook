@@ -52,8 +52,8 @@ export function renderMain(data, storyStore) {
     story: selectedStory,
   };
 
-  let storyString = story ? story(context) : '<p>There is no preview for this story</p>';
-  storyString = scopeScripts(storyString);
+  const storyString = story ? story(context) : '<p>There is no preview for this story</p>';
+
   if (storyString.then) {
     storyString.then(renderStoryString);
   } else {
