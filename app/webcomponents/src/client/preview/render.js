@@ -30,6 +30,16 @@ function scopeScripts(storyString) {
   return escapedScripts;
 }
 
+function renderStoryString(story) {
+  const storyString = scopeScripts(story);
+
+  const root = document.querySelector('#root');
+  emptyRoot(root);
+
+  const child = createFragment(storyString);
+  root.appendChild(child);
+}
+
 export function renderMain(data, storyStore) {
   if (storyStore.size() === 0) return;
 
@@ -44,12 +54,11 @@ export function renderMain(data, storyStore) {
 
   let storyString = story ? story(context) : '<p>There is no preview for this story</p>';
   storyString = scopeScripts(storyString);
-
-  const root = document.querySelector('#root');
-  emptyRoot(root);
-
-  const child = createFragment(storyString);
-  root.appendChild(child);
+  if (storyString.then) {
+    storyString.then(renderStoryString);
+  } else {
+    renderStoryString(storyString);
+  }
 }
 
 export default function renderPreview({ reduxStore, storyStore }, forceRender = false) {
