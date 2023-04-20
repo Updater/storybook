@@ -33,7 +33,7 @@
     "bootstrap": "^3.3.7",
     "gatsby": "^1.9.153",
     "gatsby-link": "^1.6.34",
-    "gatsby-plugin-sharp": "^1.6.24",
+    "gatsby-plugin-sharp": "^4.25.1",
     "gatsby-remark-autolink-headers": "^1.4.11",
     "gatsby-remark-copy-linked-files": "^1.5.25",
     "gatsby-remark-images": "^1.5.36",
